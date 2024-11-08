@@ -23,16 +23,13 @@ function getComputerChoice() {
     }
 }
 
-// functions which gets the human player's choice
-function getHumanChoice() {
-    // prompt the player for their choice, and log that choice into a variable
-    let choice = prompt("Enter rock, paper, or scissors.");
-    // make the variable case insensitive
-    userChoice = choice.toLowerCase();
-    // pass that variable to a global scope
-    return userChoice;
+
+//function which outputs what the human choice and computer choice was
+function printChoices() {
+    return console.log(`You chose ${userChoice} and the computer chose ${computerChoice}.`);
 }
 
+// function which plays one round of rock, paper, scissors, and increments the total score
 function playRound(userChoice, computerChoice) {
     if (userChoice === "rock" && computerChoice === "paper") {
         ++computerScore;
@@ -48,7 +45,7 @@ function playRound(userChoice, computerChoice) {
     }
     else if (userChoice === "paper" && computerChoice === "scissors") {
         ++computerScore;
-        console.log("You lose! Scissors beat paper.");
+        console.log("You lose! Scissors beats paper.");
     }
     else if (userChoice === "scissors" && computerChoice === "rock") {
         ++computerScore;
@@ -56,17 +53,42 @@ function playRound(userChoice, computerChoice) {
     }
     else if (userChoice === "scissors" && computerChoice === "paper") {
         ++humanScore;
-        console.log("You win! Scissors beat paper.");
+        console.log("You win! Scissors beats paper.");
     }
     else {
-        console.log("Tie! The score doesn't change");
+        console.log("Tie! The score doesn't change.");
     }
 }
 
+// functions which gets the human player's choice
+   const buttons = document.querySelectorAll("button");
+
+   buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        userChoice = button.id;
+        getComputerChoice();
+        printChoices();
+        playRound(userChoice, computerChoice);
+    })
+   })
 
 
-console.log(getComputerChoice());
 
-console.log(getHumanChoice());
+// // function play game, which implements 5 rounds of the game, and announces the winner
+// function playGame() {
+//     for (n = 1; n < 6; n++) {
+//         getHumanChoice();
+//         getComputerChoice();
+//         printChoices();
+//         playRound(userChoice, computerChoice);
+//         console.log(`Round ${n} completed. The current score is human: ${humanScore} and computer: ${computerScore}`);
+//     }
+//     if (humanScore > computerScore) {
+//         console.log("You win! Congratulations");
+//     }
+//     else {
+//         console.log("You lose! Better luck next time.");
+//     }
+// }
 
-playRound(userChoice, computerChoice);
+// playGame();
