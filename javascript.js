@@ -26,49 +26,55 @@ function getComputerChoice() {
 
 //function which outputs what the human choice and computer choice was
 function printChoices() {
-    return console.log(`You chose ${userChoice} and the computer chose ${computerChoice}.`);
+    return `You chose ${userChoice} and the computer chose ${computerChoice}. `;
 }
 
 // function which plays one round of rock, paper, scissors, and increments the total score
 function playRound(userChoice, computerChoice) {
     if (userChoice === "rock" && computerChoice === "paper") {
         ++computerScore;
-        console.log("You lose! Paper beats rock.");
+        return "You lose! Paper beats rock.";
     }
     else if (userChoice === "rock" && computerChoice === "scissors") {
         ++humanScore;
-        console.log("You win! Rock beats scissors.");
+        return "You win! Rock beats scissors.";
     }
     else if (userChoice === "paper" && computerChoice === "rock") {
         ++humanScore;
-        console.log("You win! Paper beats rock.");
+        return "You win! Paper beats rock.";
     }
     else if (userChoice === "paper" && computerChoice === "scissors") {
         ++computerScore;
-        console.log("You lose! Scissors beats paper.");
+        return "You lose! Scissors beats paper.";
     }
     else if (userChoice === "scissors" && computerChoice === "rock") {
         ++computerScore;
-        console.log("You lose! Rock beats scissors.");
+        return "You lose! Rock beats scissors.";
     }
     else if (userChoice === "scissors" && computerChoice === "paper") {
         ++humanScore;
-        console.log("You win! Scissors beats paper.");
+        return "You win! Scissors beats paper.";
     }
     else {
-        console.log("Tie! The score doesn't change.");
+        return "Tie! The score doesn't change.";
     }
 }
 
-// functions which gets the human player's choice
-   const buttons = document.querySelectorAll("button");
+// function which outputs what the overall score is
+function totalScore() {
 
+}
+
+// querySelect buttons and empty paragraph from HTML
+   const buttons = document.querySelectorAll("button");
+   const result = document.querySelector("p");
+
+   // event listener for each button click which initiates the game of rock paper scissors
    buttons.forEach((button) => {
     button.addEventListener("click", () => {
         userChoice = button.id;
         getComputerChoice();
-        printChoices();
-        playRound(userChoice, computerChoice);
+        result.textContent = printChoices() + playRound(userChoice, computerChoice);
     })
    })
 
