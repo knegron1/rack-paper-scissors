@@ -60,11 +60,6 @@ function playRound(userChoice, computerChoice) {
     }
 }
 
-// function which outputs what the overall score is
-function totalScore() {
-
-}
-
 // querySelect buttons and empty paragraph from HTML
    const buttons = document.querySelectorAll("button");
    const result = document.querySelector("p");
@@ -74,27 +69,24 @@ function totalScore() {
     button.addEventListener("click", () => {
         userChoice = button.id;
         getComputerChoice();
-        result.textContent = printChoices() + playRound(userChoice, computerChoice);
+        result.textContent = (printChoices() + playRound(userChoice, computerChoice)
+        + ` The current score is human: ${humanScore} and computer: ${computerScore}. `);
+
+        // outputs the total overall score
+        if (humanScore == 5 && computerScore == 5) {
+            result.textContent += "You and the computer tied! The game is over. Thanks for playing";
+            humanScore =  0;
+            computerScore = 0;
+        }
+        else if (humanScore == 5) {
+            result.textContent += "You won the game! The game is over. Thanks for playing";
+            humanScore =  0;
+            computerScore = 0;
+        }
+        else if (computerScore == 5) {
+            result.textContent += "The computer won the game. The game is over. Thanks for playing";
+            humanScore =  0;
+            computerScore = 0;
+        }
     })
    })
-
-
-
-// // function play game, which implements 5 rounds of the game, and announces the winner
-// function playGame() {
-//     for (n = 1; n < 6; n++) {
-//         getHumanChoice();
-//         getComputerChoice();
-//         printChoices();
-//         playRound(userChoice, computerChoice);
-//         console.log(`Round ${n} completed. The current score is human: ${humanScore} and computer: ${computerScore}`);
-//     }
-//     if (humanScore > computerScore) {
-//         console.log("You win! Congratulations");
-//     }
-//     else {
-//         console.log("You lose! Better luck next time.");
-//     }
-// }
-
-// playGame();
